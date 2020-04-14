@@ -1,0 +1,46 @@
+.search{
+    display:flex;
+    flex-direction: row;
+   
+    width:60%;
+    height: 100%;
+
+    .search-link{
+      height: 85%;
+      border:none;
+      background-color: #2a65ea;
+      padding:8px;
+      width:8%;
+      cursor: pointer;
+        svg{
+            color:white;    
+            width:16px;
+            height: 16px;
+        }
+    }
+    input{
+       
+        width: 90%;
+        height: 85%;
+        background:none;    
+        font-size: 100%;
+        padding:8px 16px;
+        border:0px;
+        border: 2px solid black;
+        &::placeholder{
+            color:black;
+           
+        }
+
+        
+    }
+   
+}
+
+@media (max-width:950px) {
+    .search{
+      
+        display: none;
+    }
+     
+}
