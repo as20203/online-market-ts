@@ -1,0 +1,96 @@
+$base-color: rgba(0, 47, 52, 0.2);
+
+
+.auth-dropdown-main{
+    width:100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+   .dropdown-icon{
+       width: fit-content;
+       height: fit-content;
+      
+   }
+  
+    .auth-dropdown-list{
+        position: absolute;
+        height: fit-content;
+        right:5px;
+        top:60px;
+        background: white;
+        border:1px solid $base-color;
+        
+        &::after{
+            content: " ";
+            position: absolute;
+            width:15px;
+            height: 15px;
+            right: 20%;
+            top: 10%;
+            border-top: 2px solid $base-color;
+            border-right: 2px solid white;
+            border-left: 2px solid $base-color;
+            border-bottom: 2px solid white;
+            margin-top:-25px;
+            background: white;
+            transform: rotate(45deg);
+        }
+
+       ul{ 
+           display: block;
+           padding:0px 16px;
+           li{
+               list-style-type: none;
+               margin-bottom:10px;
+               border-bottom:1px solid #DCDCDC;
+                &:hover{
+                    background: none;
+                }
+             
+               a{
+                   span{
+                       margin-left:5px;
+                   }
+                   svg{
+                       margin-right: 5px;
+                   }
+                   text-decoration: none;
+                   color:black;
+               }
+           }
+       }
+   }
+   .display{
+        display:block;
+    }
+    .nodisplay{
+        display:none;
+    }
+
+}
+
+
+@media (max-width:550px) {
+    .auth-dropdown-main{
+        .auth-dropdown-list{
+            &::after{
+                left:60%;
+            }
+            ul{
+                li{
+                    &:hover, &:active{
+                        animation: none;
+                    }
+                    a{ 
+                        span{
+                            display: inline-block;
+                        }
+                    }
+                }
+            } 
+        }
+    }
+}

@@ -1,5 +1,24 @@
 .landing-main{
-    display: flex;
+    display: flex;      
     flex-direction:  column;
-    height: 100%;
+    height: auto;
+  
+    .landing-search{
+        
+        display: none;
+    }
+}
+
+@media (max-width:850px) {
+    .landing-main{
+        .landing-search{
+            display: block;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+            background:white;
+            margin-top:7vh;
+            position:sticky;
+            top:7vh;
+            z-index: 2;
+        }
+    }
+
 }

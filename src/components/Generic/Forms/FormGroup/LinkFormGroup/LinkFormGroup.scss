@@ -1,0 +1,15 @@
+.generic-link-form-group{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto';
+    height:80px;
+    margin-bottom: 15px;
+    padding:8px 16px;
+    a{
+        text-decoration: none;
+        color:#2752FF;
+        &:hover{
+            color:darkblue;
+        }
+    }
+}

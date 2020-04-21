@@ -1,0 +1,53 @@
+.dropdown-content{
+    width: 90%;
+    margin:0;
+
+    ul{
+        width: 100%;
+        margin:0;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding:0;
+        
+        li{
+            background: white;
+            height: 50px;
+            margin:0;
+            width: 100%;
+            display: inline-block;
+            border-radius: 0px;
+            border:2px solid #808080;
+            border-top:0;
+            z-index: 2;
+            &:hover{
+                background:white;
+            }
+
+            a{
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                padding:8px 16px;
+                text-decoration: none;
+                line-height: 0;
+                height:45px;
+                color:black;
+                align-items: center;
+
+                
+            }
+        }
+
+        li:nth-child(3){
+            &:hover{
+                background:white
+            }
+        }
+    }
+
+    .selected{
+        background: cadetblue;
+    }
+}
+

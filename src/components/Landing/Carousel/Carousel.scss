@@ -1,5 +1,6 @@
 .carousel-main{
-
+    position: relative;
+    
     .active{
         display: block;
     }
@@ -18,11 +19,6 @@
         from {opacity: .4} 
         to {opacity: 1}
     }
-    
-    @keyframes fade {
-        from {opacity: .4} 
-        to {opacity: 1}
-    }
 
 
     .my-image{
@@ -34,24 +30,27 @@
             
         }
     }
-
-    .dot {
-        position: relative;
-        bottom:25px;
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-      }
-    
-    .active-dot{
-        background-color: white;
+    .dot-main{
+        position: absolute;
+        bottom:0;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        z-index: 1;
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+          }
+        
+        .active-dot{
+            background-color: white;
+        }
     }
-
-
-      
+    
 }

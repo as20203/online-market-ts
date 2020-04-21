@@ -8,13 +8,14 @@ interface Props {
     productPrice:string,
     sellerLocation:string,
     creationDate:string,
-    productLink:string
+    id:string
+    
 }
 
-const Product:React.FC<Props> = ({imgSrc,productName,productPrice,sellerLocation,creationDate,productLink}) =>{
+const Product:React.FC<Props> = ({imgSrc,productName,productPrice,sellerLocation,creationDate,id}) =>{
     return(
        <div className='product-main'>
-           <Link to={productLink}>
+           <Link to={'/product/'+id}>
               <figure>
                 <img src={imgSrc} alt='hello' />
               </figure>

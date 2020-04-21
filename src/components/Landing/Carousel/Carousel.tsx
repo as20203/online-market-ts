@@ -6,11 +6,12 @@ const Carousel:React.FC = () =>{
 
     const [activeIndex,setActiveIndex] = useState(0);
 
-    const onClick:any = (e:any) =>{
+    const onClick = (e:any) =>{
         const newActiveIndex:number = parseInt(e.target.getAttribute("data-index"));
         setActiveIndex(newActiveIndex)
-        
     }
+
+
 
     useEffect(()=>{
        
@@ -43,15 +44,13 @@ const Carousel:React.FC = () =>{
         )
     })
 
-
+    
     return (
-        <div className='carousel-main'>
+        <div className='carousel-main' >
             {imageList}
-            <div style={{textAlign:'center'}}>
+            <div className='dot-main'  style={{textAlign:'center'}}>
                 {dotCounter}
              </div>
-        
-
         </div>
     )
 }

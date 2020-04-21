@@ -1,7 +1,7 @@
 import React from 'react';
 import './Content.scss';
-import Product from '../Product/Product';
-import {Product as products} from '../../../../TestData/Products/Products';
+import Product from './Product/Product';
+import {Product as products} from '../../../TestData/Products/Products';
 
 
 
@@ -14,7 +14,7 @@ const Content:React.FC<Props> = ({productList}) =>{
         return(
             <Product key={index} imgSrc={product.imgSrc} productName={product.productName}
                      productPrice = {product.productPrice} sellerLocation={product.sellerLocation}
-                     creationDate = {product.creationDate}  productLink={product.productLink} />
+                     creationDate = {product.creationDate} id={product.id}/>
             )
         })
     return(

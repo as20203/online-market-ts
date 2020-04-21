@@ -1,0 +1,35 @@
+.signup-main{
+    width:100%;
+    min-height: 100%;
+    background-color: #f9fcff;
+    background-image: linear-gradient(147deg, #f9fcff 10%, #dee4ea 50%);
+    .signup-main-content{
+        position: relative;
+        top:15vh;
+        width:100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+        .signup-form-main{
+            display: flex;
+            flex-direction: column;
+            width:550px;
+            height: 850px;
+            padding:8px 16px;
+
+            h2{
+               display: flex;
+               justify-content: center;
+               font-size: 25px;
+               padding:8px 16px;
+               margin:0;
+            }
+            form{
+                height:100%;
+                padding:8px 16px;
+            }  
+        }
+    }
+}

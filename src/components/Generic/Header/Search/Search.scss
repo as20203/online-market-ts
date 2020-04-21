@@ -1,16 +1,18 @@
-.search{
+.search-main{
     display:flex;
     flex-direction: row;
-   
+    justify-content: center;
+    height:50px;
     width:60%;
-    height: 100%;
+    margin-top:5px;
+    
 
     .search-link{
-      height: 85%;
+      height: 45px;
+      width:45px;
       border:none;
       background-color: #2a65ea;
       padding:8px;
-      width:8%;
       cursor: pointer;
         svg{
             color:white;    
@@ -19,9 +21,8 @@
         }
     }
     input{
-       
-        width: 90%;
-        height: 85%;
+        width: 100%;
+        height: 45px;
         background:none;    
         font-size: 100%;
         padding:8px 16px;
@@ -31,16 +32,19 @@
             color:black;
            
         }
-
-        
     }
-   
+
 }
 
-@media (max-width:950px) {
-    .search{
-      
-        display: none;
+@media (max-width:850px) {
+    .search-main{
+       margin:5px auto;
+       width:90%;
+       justify-content: center;
+    
     }
+
+    
+
      
 }

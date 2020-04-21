@@ -1,0 +1,37 @@
+.product-page-main{
+    .product-main-content{
+        position: relative;
+        top:7vh;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        .product-gallery-content{
+            display: flex;
+            flex-flow: row wrap;
+           
+            .product-gallery{
+                width: 60%;
+                border:1px solid rgba(0,47,52,.2);
+            }
+            .product-main-information{
+                display: flex;
+                flex-direction: column;
+                width: 38%;
+                .about-product{
+                    border:1px solid rgba(0,47,52,.2);
+                }
+                .about-seller{
+                    border:1px solid rgba(0,47,52,.2);
+                }
+            } 
+        }
+        .product-additional-information{
+            .product-details{
+                border:1px solid rgba(0,47,52,.2);
+            }
+            .product-description{
+                border:1px solid rgba(0,47,52,.2);
+            }
+        }
+    }
+}
