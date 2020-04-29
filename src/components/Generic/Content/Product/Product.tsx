@@ -11,11 +11,11 @@ interface Props {
     id:string
     
 }
-
+// to={'/product/'+id}
 const Product:React.FC<Props> = ({imgSrc,productName,productPrice,sellerLocation,creationDate,id}) =>{
     return(
        <div className='product-main'>
-           <Link to={'/product/'+id}>
+           <Link   to={'/product/'+id}>
               <figure>
                 <img src={imgSrc} alt='hello' />
               </figure>

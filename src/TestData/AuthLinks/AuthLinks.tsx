@@ -3,7 +3,8 @@ import { faUser,faSignOutAlt,faPlus} from '@fortawesome/free-solid-svg-icons';
 export interface Links{
     linkName:string,
     image:any,
-    name:string
+    name:string,
+    onClick?:any
 }
 
 export const authLinks:Links[] = [
@@ -18,9 +19,9 @@ export const authLinks:Links[] = [
         name:'New Item'        
     },
     {
-        linkName:'#',
+        linkName:'/',
         image:faSignOutAlt,
-        name:'Logout'        
+        name:'Logout'
     },
 ];
 

@@ -6,17 +6,20 @@ import InputFormGroup from '../Generic/Forms/FormGroup/InputFormGroup/InputFormG
 import FormButton     from '../Generic/Forms/FormButton/FormButton';
 import Footer         from '../Generic/Footer/Footer';
 import useForm        from '../../utils/useForm';
-
+import {useHistory} from 'react-router-dom';
 
 const Signup:React.FC = () =>{
     const [register,handleRegister] = useForm({username:'',password:'',email:'',city:'',phone:''})
+    const history = useHistory()
     const onSubmit = (e: any) =>{
         e.preventDefault();
         console.log(register);
+        history.push('/login');
     }
 
     useEffect(() => {
         window.scrollTo(0, 0)
+
       }, [])
 
     return(

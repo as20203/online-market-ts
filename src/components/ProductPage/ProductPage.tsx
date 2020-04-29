@@ -1,44 +1,54 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useContext, useState} from 'react';
 import './ProductPage.scss';
 import Header from '../Generic/Header/Header';
-import {normalHeader} from '../Generic/Header/HeaderLinks/HeaderLinks';
+import {normalHeader,authHeader} from '../Generic/Header/HeaderLinks/HeaderLinks';
 import Footer from '../Generic/Footer/Footer';
+import { authContext } from '../../services/auth';
+import {useParams} from 'react-router-dom';
+import {getProduct,Product} from '../../TestData/Products/Products';
+import ProductGallery from './ProductGallery/ProductGallery';
+import AboutProduct from './AboutProduct/AboutProduct';
+import AboutSeller  from  './AboutSeller/AboutSeller';
+import ProductDetails from './ProductDetails/ProductDetails';
+import ProductDescription from './ProductDescription/ProductDescription';
+import BidProduct      from     './BidProduct/BidProduct';
+
 
 const ProductPage:React.FC = ()=>{
+    const [auth] = useContext(authContext)
+    let {id}   = useParams();
+    const [product,setProduct] = useState<Product>({id:'',imgSrc:'',productName:'',productPrice:'',
+                                                    sellerLocation:'',creationDate:'',imagesList:[],productDetails:[],productDescription:[]});
     useEffect(() => {
         window.scrollTo(0, 0)
-      }, [])
+        setProduct(getProduct(id));
+        
+      }, [id])
+    
     return(
         <div className='product-page-main'>
-            <Header children={normalHeader} />
+            <Header children={auth.isAuthenticated?authHeader:normalHeader} />
             <div className='product-main-content'>
-                <h1>This will be the product Header</h1>
+               
                 <div className='product-gallery-content'>
-                    <div className='product-gallery'>
-                        <h1>This will be the product images gallery</h1>
-                    </div>
+                    <ProductGallery products={product.imagesList} />
                     <div className='product-main-information'>
-                        <div className='about-product'>
-                            <h1>This will be the product main info</h1>
-                        </div>
-                        <div className='about-seller'>
-                            <h1>This will be the seller details</h1>
-                        </div>
-                    </div>
+                        <AboutProduct productName={product.productName} 
+                        productPrice={product.productPrice} sellerLocation={product.sellerLocation}
+                        creationDate={product.creationDate} />
+                        <AboutSeller /> 
+                        <BidProduct />
 
+                    </div>
                 </div>
 
                 <div className='product-additional-information'>
-                    <div className='product-details'>
-                        <h1>This will be the product details</h1>
-                    </div>
-
-                    <div className='product-description'>
-                        <h1>This will be the product description</h1>
-                    </div>
+                    <ProductDetails productDetails={product.productDetails} />
+                    <ProductDescription productdescription={product.productDescription} />  
                 </div>
-                <Footer />
+               
             </div>
+            <Footer />
        </div>
     )
 }

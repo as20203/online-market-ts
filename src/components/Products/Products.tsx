@@ -1,15 +1,17 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState,useEffect, useContext} from 'react';
 import './Products.scss';
 import Header from '../Generic/Header/Header';
-import {productsHeader} from '../Generic/Header/HeaderLinks/HeaderLinks';
+import {productsHeader,productsAuthHeader} from '../Generic/Header/HeaderLinks/HeaderLinks';
 import Sidebar from './Sidebar/Sidebar';
 import AllProducts from './AllProducts/AllProducts';
 import Footer from  '../Generic/Footer/Footer';
 import Search from  '../Generic/Header/Search/Search';
+import { authContext } from '../../services/auth';
 
 const Products:React.FC = () =>{
     const [expand,setExpand] = useState(false);
-    const [count,setCount]   = useState(0)
+    const [count,setCount]   = useState(0);
+    const [auth]  = useContext(authContext)
     const onClick = (e:any) => {
         window.scrollTo(0,0);
         e.preventDefault();
@@ -23,7 +25,7 @@ const Products:React.FC = () =>{
     
     return (
         <div className='products-main'>
-            <Header children={productsHeader(onClick)} />
+            <Header children={auth.isAuthenticated?productsAuthHeader(onClick):productsHeader(onClick)} />
             <div className='products-page-search'>
                 <Search />
             </div>

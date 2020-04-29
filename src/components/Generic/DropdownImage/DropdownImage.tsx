@@ -1,25 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './DropdownImage.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser} from '@fortawesome/free-solid-svg-icons';
 import {Link}  from 'react-router-dom';
 import {Links} from '../../../TestData/AuthLinks/AuthLinks';
-
+import {authContext} from '../../../services/auth';
+import {useHistory} from 'react-router-dom';
 interface Props{
     iconList:Links[]
 }
 
 const DropdownImage:React.FC<Props> = ({iconList}) =>{
     const[visible,setVisible] = useState(false);
+    const history = useHistory();
+    const [auth,dispatch] = useContext(authContext);
+    
     const onClick = (e:any) =>{
         e.preventDefault();
-        console.log('clicked');
         setVisible(visible=>!visible);
     }
 
-    const liItems = iconList.map(icon=>{
+    const onLogout =(e:any)=>{
+        e.preventDefault();
+        localStorage.clear()
+        dispatch({type:'notauthenticated',value:!auth.isAuthenticated});
+        history.push('/')
+    }
+
+    const liItems = iconList.map((icon,index)=>{
         return (
-            <li><Link to={icon.linkName}><FontAwesomeIcon icon={icon.image} /><span>{icon.name}</span></Link></li>
+        <li key={index} ><Link onClick={icon.name==='Logout'?onLogout:()=>{}} to={icon.linkName}><FontAwesomeIcon icon={icon.image} /><span>{icon.name}</span></Link></li>
         )
     })
     return(
@@ -27,9 +37,6 @@ const DropdownImage:React.FC<Props> = ({iconList}) =>{
             <div className='dropdown-icon' ><FontAwesomeIcon icon={faUser} /></div>
             <div className={visible?'auth-dropdown-list display':'auth-dropdown-list nodisplay'}>
                 <ul>
-                    {/* <li><Link to='#'><FontAwesomeIcon icon={faUser} /><span>Profile</span></Link></li>
-                    <li><Link to='#'><FontAwesomeIcon icon={faPlus} /><span>New Product</span></Link></li>
-                    <li><Link to='#'><FontAwesomeIcon icon={faSignOutAlt} /><span>Logout</span></Link></li> */}
                     {liItems}
                 </ul>
             </div>

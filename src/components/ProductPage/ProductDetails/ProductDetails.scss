@@ -1,0 +1,28 @@
+.product-details{
+    h3{
+      color:#002f34;
+      font-size: 20px;
+
+    } 
+    .product-detail{
+        display: flex;
+        flex-flow: row wrap;
+        margin-top:8px;
+        .individual-detail{
+            margin-bottom:8px;
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+            color:rgba(0,47,52,.64);
+            font-size:16px;
+            height:20px;
+            font-family: "Roboto";
+            span:nth-child(even){
+                color:#002f34;
+                width:50%;
+                text-align: left;
+            }
+
+        }
+    }
+  }

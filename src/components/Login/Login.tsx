@@ -1,5 +1,6 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useContext} from 'react';
 import './Login.scss';
+import {authContext} from '../../services/auth';
 import Header from '../Generic/Header/Header';
 import {normalHeader} from '../Generic/Header/HeaderLinks/HeaderLinks';
 import Footer from '../Generic/Footer/Footer';
@@ -7,19 +8,27 @@ import InputFormGroup from '../Generic/Forms/FormGroup/InputFormGroup/InputFormG
 import LinkFormGroup from '../Generic/Forms/FormGroup/LinkFormGroup/LinkFormGroup';
 import FormButton from '../Generic/Forms/FormButton/FormButton';
 import useForm from '../../utils/useForm';
+import {useHistory} from 'react-router-dom';
 
-const Login:React.FC = () =>{
+
+
+const Login:React.FC= () =>{
     let [login,handleLogin] = useForm({username:'',password:''});
-   
+    const [auth,dispatch] = useContext(authContext);
+    const history = useHistory();
 
-    const onSubmit = (e: any) =>{
+
+    const onSubmit = async(e: any) =>{
         e.preventDefault();
-        console.log(login);
+        dispatch({type:'authenticated',value:!auth.isAuthenticated});
+        localStorage.setItem("Token",'sjfsdkfjdsklsfjksdjdfksjfdj');
+        history.push('/');
     }
 
     useEffect(() => {
         window.scrollTo(0, 0)
-      }, [])
+       
+    }, [])
 
     return (
         <div className='login-main'>

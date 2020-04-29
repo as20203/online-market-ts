@@ -1,0 +1,19 @@
+.product-description{
+    margin-top:16px;
+    border-top:1px solid rgba(0,47,52,.2);
+    h3{
+        color:#002f34;
+        font-size:20px;
+    }
+
+    p{
+        display: block; 
+        word-break: break-word;
+        font-size:14px;
+        color:#002f34;
+        &:first-child{
+            margin-top:16px;
+        }
+    }
+   
+}
