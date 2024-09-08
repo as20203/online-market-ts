@@ -1,7 +1,7 @@
 import { ClientOnly } from './client'
 
 export function generateStaticParams() {
-    return [{ slug: ['/product/2343242333'] }]
+    return [{ slug: [''] }]
 }
 
 export default function Page() {

@@ -5,6 +5,11 @@ import {
   useResizeColumns,
   useFlexLayout,
   useRowSelect,
+  HeaderPropGetter,
+  CellPropGetter,
+  // TableCellProps,
+  TableCommonProps,
+  Column
 } from 'react-table'
 
 import makeData from './makeData'
@@ -76,13 +81,13 @@ const Styles = styled.div`
 `
 
 
-const headerProps = (props: any, { column }: any) => getStyles(props, column.align)
+const headerProps: HeaderPropGetter<{}> = (props, { column }) => getStyles(props, column.align)
 
-const cellProps = (props: any, { cell }: any) => getStyles(props, cell.column.align)
+const cellProps: CellPropGetter<{}> = (props, { cell }) => getStyles(props, cell.column.align)
 
 
 
-const getStyles = (props: any, align = 'left') => [
+const getStyles = (props: Partial<TableCommonProps>, align = 'left') => [
   props,
   {
     style: {
@@ -111,8 +116,8 @@ const IndeterminateCheckbox = React.forwardRef<any, any>(
 )
 
 interface Props {
-  columns: any,
-  data: any
+  columns: Column<object>[],
+  data: object[]
 }
 const Table: React.FC<Props> = ({ columns, data }) => {
   const defaultColumn = React.useMemo(
@@ -145,14 +150,14 @@ const Table: React.FC<Props> = ({ columns, data }) => {
           maxWidth: 35,
           // The header can use the table's getToggleAllRowsSelectedProps method
           // to render a checkbox
-          Header: ({ getToggleAllRowsSelectedProps }: any) => (
+          Header: ({ getToggleAllRowsSelectedProps }) => (
             <div>
               <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
             </div>
           ),
           // The cell can use the individual row's getToggleRowSelectedProps method
           // to the render a checkbox
-          Cell: ({ row }: any) => (
+          Cell: ({ row }) => (
             <div>
               <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
             </div>
@@ -162,7 +167,7 @@ const Table: React.FC<Props> = ({ columns, data }) => {
       ])
       hooks.useInstanceBeforeDimensions.push(({ headerGroups }) => {
         // fix the parent group of the selection button to not be resizable
-        const selectionGroupHeader: any = headerGroups[0].headers[0]
+        const selectionGroupHeader = headerGroups[0].headers[0]
         selectionGroupHeader.canResize = false
       })
     }
@@ -178,13 +183,14 @@ const Table: React.FC<Props> = ({ columns, data }) => {
             })}
             className="tr"
           >
-            {headerGroup.headers.map((column: any) => (
+            {headerGroup.headers.map((column) => (
+
               <div {...column.getHeaderProps(headerProps)} className="th">
                 {column.render('Header')}
                 {/* Use column.getResizerProps to hook up the events correctly */}
-                {column.canResize && (
+                {column.isVisible && (
                   <div
-                    {...column.getResizerProps()}
+                    {...column.getResizerProps}
                     className={`resizer ${column.isResizing ? 'isResizing' : ''
                       }`}
                   />
