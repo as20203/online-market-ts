@@ -9,6 +9,7 @@ import AuthContextProvider from './services/auth';
 import NonPrivateRoute from './components/Generic/Routes/NonPrivateRoute/NonPrivateRoute';
 
 
+
 function App() {
   return (
     <AuthContextProvider>
