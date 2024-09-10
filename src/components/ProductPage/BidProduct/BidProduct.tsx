@@ -4,29 +4,29 @@ import FormButton from '../../Generic/Forms/FormButton/FormButton';
 import BiddingTable from './BiddingTable/BiddingTable';
 
 
-const BidProduct:React.FC = () =>{
-    const[modalDisplay,setModalDisplay] = useState('product-modal-nodisplay')
-    const onClick = (e:any)=>{
-        setModalDisplay(modalDisplay==='product-modal-nodisplay'?
-        'product-modal-display':'product-modal-nodisplay')
-        
+const BidProduct: React.FC = () => {
+    const [modalDisplay, setModalDisplay] = useState('product-modal-nodisplay')
+    const onClick = (e: any) => {
+        setModalDisplay(modalDisplay === 'product-modal-nodisplay' ?
+            'product-modal-display' : 'product-modal-nodisplay')
+
 
     }
 
-    const onModalClick = (e:any)=>{
+    const onModalClick = (e: any) => {
         e.preventDefault();
         console.log(e.target.getAttribute('class'));
-        if(e.target.getAttribute('class')==='product-modal-display'){
+        if (e.target.getAttribute('class') === 'product-modal-display') {
             setModalDisplay('product-modal-nodisplay');
         }
     }
-    return(
+    return (
         <div className='product-bidding'>
-            <FormButton onClick={onClick}  text="Bid on this Product" />
+            <FormButton onClick={onClick} text="Bid on this Product" />
             <div onClick={onModalClick} className={modalDisplay}>
                 <div className='product-bidding-table'>
-                        <h1>This table will be updated</h1>
-                        <BiddingTable />
+                    {/* <h1>This table will be updated</h1> */}
+                    <BiddingTable />
                 </div>
             </div>
         </div>

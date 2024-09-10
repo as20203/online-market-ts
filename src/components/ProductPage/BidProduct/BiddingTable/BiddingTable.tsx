@@ -1,18 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
-  useTable,
-  useResizeColumns,
-  useFlexLayout,
-  useRowSelect,
-  HeaderPropGetter,
-  CellPropGetter,
-  // TableCellProps,
-  TableCommonProps,
-  Column
-} from 'react-table'
+  useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  flexRender,
+  createColumnHelper,
+  GroupColumnDef
+} from '@tanstack/react-table';
 
 import makeData from './makeData'
+type Person = {
+  firstName: string
+  lastName: string
+  age: number
+  visits: number
+  status: string
+  progress: number
+}
 
 const Styles = styled.div`
   padding: 1rem;
@@ -80,191 +86,111 @@ const Styles = styled.div`
   }
 `
 
-
-const headerProps: HeaderPropGetter<{}> = (props, { column }) => getStyles(props, column.align)
-
-const cellProps: CellPropGetter<{}> = (props, { cell }) => getStyles(props, cell.column.align)
-
-
-
-const getStyles = (props: Partial<TableCommonProps>, align = 'left') => [
-  props,
-  {
-    style: {
-      justifyContent: align === 'right' ? 'flex-end' : 'flex-start',
-      alignItems: 'flex-start',
-      display: 'flex',
-    },
-  },
-]
-
-const IndeterminateCheckbox = React.forwardRef<any, any>(
-  ({ indeterminate, ...rest }, ref: any) => {
-    const defaultRef = React.useRef()
-    const resolvedRef = ref || defaultRef
-
-    React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate
-    }, [resolvedRef, indeterminate])
-
-    return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    )
-  }
-)
-
 interface Props {
-  columns: Column<object>[],
-  data: object[]
+  columns: GroupColumnDef<Person, unknown>[],
+  data: Person[]
 }
 const Table: React.FC<Props> = ({ columns, data }) => {
-  const defaultColumn = React.useMemo(
-    () => ({
-      // When using the useFlexLayout:
-      minWidth: 30, // minWidth is only used as a limit for resizing
-      width: 150, // width is used for both the flex-basis and flex-grow
-      maxWidth: 200, // maxWidth is only used as a limit for resizing
-    }),
-    []
-  )
 
-  const { getTableProps, headerGroups, rows, prepareRow } = useTable(
-    {
-      columns,
-      data,
-      defaultColumn,
-    },
-    useResizeColumns,
-    useFlexLayout,
-    useRowSelect,
-    hooks => {
-      hooks.allColumns.push(columns => [
-        // Let's make a column for selection
-        {
-          id: 'selection',
-          disableResizing: true,
-          minWidth: 35,
-          width: 35,
-          maxWidth: 35,
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-            </div>
-          ),
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
-          ),
-        },
-        ...columns,
-      ])
-      hooks.useInstanceBeforeDimensions.push(({ headerGroups }) => {
-        // fix the parent group of the selection button to not be resizable
-        const selectionGroupHeader = headerGroups[0].headers[0]
-        selectionGroupHeader.canResize = false
-      })
-    }
-  )
+  const { getHeaderGroups, getRowModel } = useReactTable({
+    columns,
+    data,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(), //order doesn't matter anymore!
+  });
 
   return (
-    <div {...getTableProps()} className="table">
-      <div>
-        {headerGroups.map(headerGroup => (
-          <div
-            {...headerGroup.getHeaderGroupProps({
-              // style: { paddingRight: '15px' },
-            })}
-            className="tr"
-          >
-            {headerGroup.headers.map((column) => (
-
-              <div {...column.getHeaderProps(headerProps)} className="th">
-                {column.render('Header')}
-                {/* Use column.getResizerProps to hook up the events correctly */}
-                {column.isVisible && (
-                  <div
-                    {...column.getResizerProps}
-                    className={`resizer ${column.isResizing ? 'isResizing' : ''
-                      }`}
-                  />
+    <table className='table'>
+      <thead>
+        {getHeaderGroups().map(headerGroup => (
+          <tr className='tr'>
+            {headerGroup.headers.map((header) => (
+              <th className="th" colSpan={header.colSpan} key={header.id}>
+                {flexRender(
+                  header.column.columnDef.header,
+                  header.getContext()
                 )}
-              </div>
+              </th>
             ))}
-          </div>
+          </tr>
         ))}
-      </div>
-      <div className="tbody">
-        {rows.map(row => {
-          prepareRow(row)
+      </thead>
+      <tbody>
+        {getRowModel().rows.map(row => {
           return (
-            <div {...row.getRowProps()} className="tr">
-              {row.cells.map(cell => {
+            <tr className='tr'>
+              {row.getAllCells().map(cell => {
                 return (
-                  <div {...cell.getCellProps(cellProps)} className="td">
-                    {cell.render('Cell')}
-                  </div>
+                  <td key={cell.id} className="td">
+                    {flexRender(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    )}
+                  </td>
                 )
               })}
-            </div>
+            </tr>
           )
         })}
-      </div>
-    </div>
+      </tbody>
+    </table>
   )
 }
 
 function App() {
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Name',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'firstName',
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'lastName',
-          },
-        ],
-      },
-      {
-        Header: 'Info',
-        columns: [
-          {
-            Header: 'Age',
-            accessor: 'age',
-            width: 50,
-            align: 'right',
-          },
-          {
-            Header: 'Visits',
-            accessor: 'visits',
-            width: 50,
-            align: 'right',
-          },
-          {
-            Header: 'Status',
-            accessor: 'status',
-          },
-          {
-            Header: 'Profile Progress',
-            accessor: 'progress',
-          },
-        ],
-      },
-    ],
-    []
-  )
 
+
+
+  const columnHelper = createColumnHelper<Person>()
+
+  // Make some columns!
+  const columns = [
+    columnHelper.group({
+      header: 'Name',
+      footer: props => props.column.id,
+      columns: [
+        // Accessor Column
+        columnHelper.accessor('firstName', {
+          cell: info => info.getValue(),
+          footer: props => props.column.id,
+        }),
+        // Accessor Column
+        columnHelper.accessor(row => row.lastName, {
+          id: 'lastName',
+          cell: info => info.getValue(),
+          header: () => <span>Last Name</span>,
+          footer: props => props.column.id,
+        }),
+      ],
+    }),
+    // Grouping Column
+    columnHelper.group({
+      header: 'Info',
+      footer: props => props.column.id,
+      columns: [
+        // Accessor Column
+        columnHelper.accessor('age', {
+          header: () => 'Age',
+          footer: props => props.column.id,
+        }),
+        columnHelper.accessor('visits', {
+          header: () => <span>Visits</span>,
+          footer: props => props.column.id,
+        }),
+        // Accessor Column
+        columnHelper.accessor('status', {
+          header: 'Status',
+          footer: props => props.column.id,
+        }),
+        // Accessor Column
+        columnHelper.accessor('progress', {
+          header: 'Profile Progress',
+          footer: props => props.column.id,
+        }),
+      ],
+    }),
+  ]
   const data = React.useMemo(() => makeData(20), [])
 
   return (

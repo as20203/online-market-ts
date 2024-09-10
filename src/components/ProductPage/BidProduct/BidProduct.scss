@@ -1,26 +1,26 @@
-.product-bidding{
-    .product-modal-display{
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top:0;
-        left:0;
-        background: rgba(0,0,0,0.4);
-        z-index:2;
-      
-    }
+.product-bidding {
+  .product-modal-display {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+  }
 
-    .product-bidding-table{
-        position: fixed;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%);
-        width:60%;
-        height:90%;
-        background: whitesmoke;
-    }
+  .product-bidding-table {
+    padding: "25px";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 90%;
+    background: whitesmoke;
+  }
 
-    .product-modal-nodisplay{
-        display: none;
-    }
+  .product-modal-nodisplay {
+    display: none;
+  }
 }
