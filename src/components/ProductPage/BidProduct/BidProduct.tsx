@@ -25,7 +25,6 @@ const BidProduct: React.FC = () => {
             <FormButton onClick={onClick} text="Bid on this Product" />
             <div onClick={onModalClick} className={modalDisplay}>
                 <div className='product-bidding-table'>
-                    {/* <h1>This table will be updated</h1> */}
                     <BiddingTable />
                 </div>
             </div>

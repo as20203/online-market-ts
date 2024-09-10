@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import {
   useReactTable,
@@ -20,7 +20,7 @@ type Person = {
   progress: number
 }
 
-const Styles = styled.div`
+const Styles = styled.table`
   padding: 1rem;
   ${'' /* These styles are suggested for the table fill all available space in its containing element */}
   display: block;
@@ -58,6 +58,7 @@ const Styles = styled.div`
       margin: 0;
       padding: 0.5rem;
       border-right: 1px solid black;
+      border-bottom: 1px solid black;
 
       ${'' /* In this example we use an absolutely position resizer,
        so this is required. */}
@@ -102,11 +103,11 @@ const Table: React.FC<Props> = ({ columns, data }) => {
 
   return (
     <table className='table'>
-      <thead>
+      <thead className='thead'>
         {getHeaderGroups().map(headerGroup => (
           <tr className='tr'>
             {headerGroup.headers.map((header) => (
-              <th className="th" colSpan={header.colSpan} key={header.id}>
+              <th className='th' colSpan={header.colSpan} key={header.id}>
                 {flexRender(
                   header.column.columnDef.header,
                   header.getContext()
@@ -116,7 +117,7 @@ const Table: React.FC<Props> = ({ columns, data }) => {
           </tr>
         ))}
       </thead>
-      <tbody>
+      <tbody className='tbody'>
         {getRowModel().rows.map(row => {
           return (
             <tr className='tr'>
@@ -138,10 +139,7 @@ const Table: React.FC<Props> = ({ columns, data }) => {
   )
 }
 
-function App() {
-
-
-
+function BiddingTable() {
   const columnHelper = createColumnHelper<Person>()
 
   // Make some columns!
@@ -191,7 +189,7 @@ function App() {
       ],
     }),
   ]
-  const data = React.useMemo(() => makeData(20), [])
+  const data = useMemo(() => makeData(20), [])
 
   return (
     <Styles>
@@ -200,4 +198,4 @@ function App() {
   )
 }
 
-export default App
+export default BiddingTable
