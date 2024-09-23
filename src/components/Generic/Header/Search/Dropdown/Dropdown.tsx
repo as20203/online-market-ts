@@ -1,28 +1,28 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
+import { FC } from 'react';
+import { Link } from 'react-router-dom'
 import './Dropdown.scss';
-import {Product as products} from '../../../../../TestData/Products/Products';
+import { ProductList } from '~/testData';
 
 
 interface Props {
-    productList : products [];
-    cursor:number,
-    setCursor:any
+    productList: ProductList[];
+    cursor: number,
+    setCursor: any
 }
 
 
-const Dropdown:React.FC<Props> = ({productList,cursor,setCursor}) =>{
+export const Dropdown: FC<Props> = ({ productList, cursor, setCursor }) => {
 
-    const mouseOver = (e:any) =>{
+    const mouseOver = (e: any) => {
         e.preventDefault();
-        const index:number = parseInt((e.target.getAttribute('data-index')));
+        const index: number = parseInt((e.target.getAttribute('data-index')));
         setCursor(index);
     }
     //Filtering the recieved list according to typed search
-    const products = productList.map((product,index)=>{
-        return <li onMouseOver={mouseOver}  key={index}><Link to={'/product/'+product.id} data-index={index} className={index===cursor?'selected':''} >{product.productName}</Link></li>
+    const products = productList.map((product, index) => {
+        return <li onMouseOver={mouseOver} key={index}><Link to={'/product/' + product.id} data-index={index} className={index === cursor ? 'selected' : ''} >{product.productName}</Link></li>
     })
-    return(
+    return (
         <ul>
             {products}
         </ul>

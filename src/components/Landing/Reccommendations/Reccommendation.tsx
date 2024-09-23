@@ -1,13 +1,13 @@
 import React from 'react';
 import './Reccommendation.scss';
-import  Content from '../../Generic/Content/Content';
-import {productList} from '../../../TestData/Products/Products'
+import Content from '../../Generic/Content/Content';
+import { productList } from '../../../testData/Products/Products'
 
-const Recommendation:React.FC = () =>{
-    return(
+const Recommendation: React.FC = () => {
+    return (
         <div className='recommendations-main'>
             <h2>Fresh Recommendations</h2>
-            <Content productList={productList}  />
+            <Content productList={productList} />
         </div>
     )
 }

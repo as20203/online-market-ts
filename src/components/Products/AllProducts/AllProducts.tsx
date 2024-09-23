@@ -1,12 +1,12 @@
 import React from 'react';
-import  Content from '../../Generic/Content/Content';
-import {productList} from '../../../TestData/Products/Products'
+import Content from '../../Generic/Content/Content';
+import { productList } from '../../../testData/Products/Products'
 import './AllProducts.scss'
 
-const AllProducts:React.FC = () =>{
+const AllProducts: React.FC = () => {
     return (
         <div className='allproducts-main'>
-            <Content productList={productList}  />
+            <Content productList={productList} />
         </div>
     )
 }

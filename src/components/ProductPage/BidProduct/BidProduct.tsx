@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './BidProduct.scss';
-import FormButton from '../../Generic/Forms/FormButton/FormButton';
+import { FormButton } from '~/components';
 import BiddingTable from './BiddingTable/BiddingTable';
 
 

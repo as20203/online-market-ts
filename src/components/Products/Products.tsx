@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './Products.scss';
 import Header from '../Generic/Header/Header';
-import { productsHeader, productsAuthHeader } from '../Generic/Header/HeaderLinks/HeaderLinks';
 import Sidebar from './Sidebar/Sidebar';
 import AllProducts from './AllProducts/AllProducts';
-import Footer from '../Generic/Footer/Footer';
-import Search from '../Generic/Header/Search/Search';
+import { Search, Footer, productsAuthHeader, productsHeader } from '~/components';
 import { authContext } from '../../services/auth';
 
 const Products: React.FC = () => {

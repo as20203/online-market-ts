@@ -1,18 +1,17 @@
-import React from 'react';
+import { ReactNode, FC } from 'react';
 import './Header.scss';
 
 
-interface Props{
-    children: React.ReactNode
+interface Props {
+    children: ReactNode
 }
 
-const Header:React.FC<Props>= ({children}) =>{
+const Header: FC<Props> = ({ children }) => {
 
-    return(
-       
+    return (
+
         <div className='header-main'>
             {children}
-           
         </div>
     )
 

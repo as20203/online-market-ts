@@ -1,10 +1,5 @@
 import React from 'react';
 import './InputFormGroup.scss'
-
-// interface Remaining{
-//     regex:string
-// }
-
 interface Props {
     labelName: string,
     name: string,
@@ -14,7 +9,7 @@ interface Props {
     onChange: any,
     regex?: string
 }
-const InputFormGroup: React.FC<Props> = ({ labelName, name, type, placeholder, value, onChange, regex }) => {
+export const InputFormGroup: React.FC<Props> = ({ labelName, name, type, placeholder, value, onChange, regex }) => {
 
     return (
         <div className='generic-input-form-group'>
@@ -23,4 +18,3 @@ const InputFormGroup: React.FC<Props> = ({ labelName, name, type, placeholder, v
         </div>
     )
 }
-export default InputFormGroup;

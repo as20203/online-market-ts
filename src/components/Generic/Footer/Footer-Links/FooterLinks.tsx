@@ -1,19 +1,19 @@
 import React from 'react';
 import './FooterLinks.scss';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface Props {
-    linksList:link []
+    linksList: link[]
 }
 
 interface link {
-    name:string,
-    route:string
+    name: string,
+    route: string
 }
 
 
-const FooterLinks:React.FC<Props> = ({linksList}) =>{
-    const links = linksList.map(link=>{
+export const FooterLinks: React.FC<Props> = ({ linksList }) => {
+    const links = linksList.map(link => {
         return (
             <li key={link.name}><Link to={link.route}>{link.name}</Link></li>
         )
@@ -27,5 +27,3 @@ const FooterLinks:React.FC<Props> = ({linksList}) =>{
 
 
 }
-
-export default FooterLinks;

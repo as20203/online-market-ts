@@ -1,11 +1,11 @@
 import './Content.scss';
-import Product from './Product/Product';
-import { Product as products } from '../../../TestData/Products/Products';
+import { Product } from '~/components';
+import { ProductList } from '~/testData';
 
 
 
 interface Props {
-    productList: products[];
+    productList: ProductList[];
 
 }
 const Content: React.FC<Props> = ({ productList }) => {

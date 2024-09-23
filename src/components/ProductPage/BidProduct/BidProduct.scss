@@ -10,6 +10,10 @@
   }
 
   .product-bidding-table {
+    @media screen and (max-width: 650px) {
+      width: 80vw;
+      /* some other style */
+    }
     padding: "25px";
     position: fixed;
     top: 55%;
