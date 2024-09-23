@@ -3,10 +3,8 @@ import './Login.scss';
 import { authContext } from '../../services/auth';
 import Header from '../Generic/Header/Header';
 import { normalHeader } from '../Generic/Header/HeaderLinks/HeaderLinks';
-import Footer from '../Generic/Footer/Footer';
-import InputFormGroup from '../Generic/Forms/FormGroup/InputFormGroup/InputFormGroup';
-import LinkFormGroup from '../Generic/Forms/FormGroup/LinkFormGroup/LinkFormGroup';
-import FormButton from '../Generic/Forms/FormButton/FormButton';
+import { Footer } from '~/components';
+import { InputFormGroup, LinkFormGroup, FormButton } from '~/components';
 import useForm from '../../utils/useForm';
 import { useHistory } from 'react-router-dom';
 
@@ -27,7 +25,6 @@ const Login: React.FC = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-
     }, [])
 
     return (
