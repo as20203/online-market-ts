@@ -18,6 +18,8 @@
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "namor": "^2.0.2",
+    "aws-cdk-lib": "^2.38.0",
+    "constructs": "^10.0.0",
     "next": "^14.2.8",
     "process": "^0.11.10",
     "react": "^18.2.0",
